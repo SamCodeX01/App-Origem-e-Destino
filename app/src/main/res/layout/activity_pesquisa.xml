@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#12A08080"
     tools:context=".PesquisaActivity">
 
     <TextView
@@ -27,6 +28,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="109dp"
+        android:background="#0E000000"
         app:layout_constraintEnd_toEndOf="@+id/spnOrigem"
         app:layout_constraintStart_toStartOf="@+id/spnOrigem"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -35,19 +37,21 @@
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#948F8F"
+        android:background="#0E000000"
         android:textAlignment="center"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/spnDestino"
         app:layout_constraintStart_toStartOf="@+id/spnDestino"
         app:layout_constraintTop_toBottomOf="@+id/spnDestino"
-        tools:text="mudar linha" />
+        tools:text="Selecione o destino" />
 
     <Spinner
         android:id="@+id/spnOrigem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="67dp"
+        android:background="#0E000000"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -56,13 +60,14 @@
         android:id="@+id/textView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#E61010"
+        android:background="#0E000000"
         android:textAlignment="center"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/spnOrigem"
         app:layout_constraintStart_toStartOf="@+id/spnOrigem"
         app:layout_constraintTop_toBottomOf="@+id/spnOrigem"
-        tools:text="mudar linha" />
+        tools:text="Selecione a origem" />
 
     <TextView
         android:id="@+id/textView5"

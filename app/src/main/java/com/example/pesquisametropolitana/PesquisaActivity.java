@@ -19,8 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class PesquisaActivity extends AppCompatActivity {
-
-//    private static final int LENGHT_SHORT = ;
+    private BancoDeDados bd = null;
     private String[] linhaVermelha, linhaDiamante, linhaDiamanteEvermelha;
     private Spinner spnOrigem, spnDestino;
     private Button btnProxima;
@@ -43,8 +42,9 @@ public class PesquisaActivity extends AppCompatActivity {
     }
 
 
-
     private void mainConfig() {
+        bd = BancoDeDados.getInstance();
+
         // Estações disponíveis //CARREGAR DEPOIS
         linhaVermelha = new String[]{
                 "Corinthians-Itaquera",
@@ -66,7 +66,6 @@ public class PesquisaActivity extends AppCompatActivity {
                 "Marechal Deodoro",
                 "Palmeiras-Barra Funda"
         };
-
 
         linhaDiamante = new String[]{
                 "Júlio Prestes",
@@ -95,7 +94,7 @@ public class PesquisaActivity extends AppCompatActivity {
 
         linhaDiamanteEvermelha = new String[] {
                 "Selecione uma parada",
-                "LINHA VERMELHA: ",
+                "LINHA VERMELHA:",
                 "Corinthians-Itaquera",
                 "Artur Alvim",
                 "Patriarca-Vila Ré",
@@ -115,7 +114,7 @@ public class PesquisaActivity extends AppCompatActivity {
                 "Marechal Deodoro",
                 "Palmeiras-Barra Funda",
 
-                "LINHA DIAMANTE: ",
+                "LINHA DIAMANTE:",
                 "Júlio Prestes",
                 "Palmeiras-Barra Funda",
                 "Lapa",
@@ -138,7 +137,7 @@ public class PesquisaActivity extends AppCompatActivity {
                 "Itapevi",
                 "Santa Rita",
                 "Amador Bueno"
-    };
+        };
 
         spnOrigem = (Spinner) findViewById(R.id.spnOrigem);
         spnDestino = (Spinner) findViewById(R.id.spnDestino);
@@ -146,61 +145,69 @@ public class PesquisaActivity extends AppCompatActivity {
 
         configurarSpinner(spnOrigem);
         configurarSpinner(spnDestino);
-    }
+    } // OK
+
 
     private void configurarSpinner(Spinner spinner) {
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, linhaDiamanteEvermelha);
         spinner.setAdapter(adapter);
-    }
+    } // OK
 
-    private int metodo(String estacaoEscolhida) {
+
+    private void pintarSpinner(String estacaoEscolhida) {
         for(String estacao: linhaDiamante) { // Pega cada estação que existe na linha diamante
             if (estacaoEscolhida.equals(estacao)){
                 spnOrigem.setBackgroundColor(Color.GRAY);
-                return 0;
+                return;
             }
         }
 
-
-        for(String estacao: linhaVermelha) { // Pega cada estação que existe na linha diamante
+        for(String estacao: linhaVermelha) { // Pega cada estação que existe na linha vermelha
             if (estacaoEscolhida.equals(estacao)){
                 spnOrigem.setBackgroundColor(Color.RED);
-                return 0;
+                return;
             }
         }
-        return 0;
-    }
+    } // OK
+
+
     private void listeners() {
-        btnProxima.setOnClickListener(r -> { //TEM QUE VER
+        // Passa para a próxima tela (de cadastro)
+        btnProxima.setOnClickListener(r -> {
             String origem = spnOrigem.getSelectedItem().toString();
             String destino = spnDestino.getSelectedItem().toString();
-            String padrao = "Selecione uma parada";
 
-            if (origem != padrao && destino != padrao) {
-                Toast.makeText(this, "Obrigado pela resposta!", LENGTH_SHORT).show();
-                resetarCampos();
+            String padrao = "Selecione uma parada";
+            String sel_diamante = "LINHA DIAMANTE:";
+            String sel_vermelha = "LINHA VERMELHA:";
+
+            if (origem != padrao && origem != sel_diamante && origem != sel_vermelha &&
+                    destino != padrao && destino != sel_diamante && destino != sel_vermelha) {
+
+                // Adicionando ao banco
+                bd.setOrigens(origem);
+                bd.setDestinos(destino);
+
+                startActivity(new Intent(this, CadastroActivity.class));
+                finish();
             }
             else
                 Toast.makeText(this, "Dados inválidos ou campos vazios!", LENGTH_SHORT).show();
         });
 
 
-
+        // Aguarda a seleção de uma opção do spinner
         spnOrigem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String origem = spnOrigem.getSelectedItem().toString();
                 spnOrigem.setBackgroundColor(Color.WHITE);
-                metodo(spnOrigem.getSelectedItem().toString());
+                pintarSpinner(origem);
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
                 // Opcional (mas obrigatório implementar)
             }
         });
-
-    }
-
-    private void resetarCampos() {
-        // FAZER
     }
 
 }

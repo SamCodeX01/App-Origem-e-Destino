@@ -15,9 +15,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class LoginActivity extends AppCompatActivity {
-
+    private BancoDeDados bd = null;
     private EditText txtUsuario, txtSenha;
     private Button btnLogar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
     private void mainConfig() {
+        bd = BancoDeDados.getInstance();
         txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         txtSenha = (EditText) findViewById(R.id.txtSenha);
         btnLogar = (Button) findViewById(R.id.btnLogar);
     }
+
 
     private void listeners() {
         btnLogar.setOnClickListener(r -> {
@@ -48,6 +52,10 @@ public class LoginActivity extends AppCompatActivity {
 
             if (usuario.equals("") && senha.equals("")) {
                 startActivity(new Intent(this, PesquisaActivity.class));
+                finish();
+            }
+            else if (usuario.equals("admin") && senha.equals("admin")) {
+                startActivity(new Intent(this, AdminActivity.class));
                 finish();
             }
             else
