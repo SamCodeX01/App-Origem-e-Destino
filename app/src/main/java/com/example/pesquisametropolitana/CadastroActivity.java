@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import static android.widget.Toast.LENGTH_LONG;
+import static android.widget.Toast.LENGTH_SHORT;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class CadastroActivity extends AppCompatActivity {
     private BancoDeDados bd = null;
+
     private EditText txtNome, txtTelefone;
     private Button btnVoltar, btnFinalizar;
 
@@ -57,21 +59,30 @@ public class CadastroActivity extends AppCompatActivity {
 
         // Guarda respostas e inicia nova pesquisa
         btnFinalizar.setOnClickListener(r -> {
-
+//            guardarRespostas();
             String nome = txtNome.getText().toString();
             String telefone = txtTelefone.getText().toString();
 
             bd.setNome(nome);
             bd.setTelefone(telefone);
             bd.quantidadeRespostas++;
-            Toast.makeText(this, "Obrigado pela resposta!", LENGTH_LONG).show();
-
+            Toast.makeText(this, "Obrigado pela resposta!", LENGTH_SHORT).show();
             startActivity(new Intent(this, PesquisaActivity.class));
             finish();
         });
     }
 
-
-
+//    private void guardarRespostas() {
+//        String nome = txtNome.getText().toString();
+//        String telefone = txtTelefone.getText().toString();
+//
+//        bd.setNome(nome);
+//        bd.setTelefone(telefone);
+//        bd.quantidadeRespostas++;
+//        Toast.makeText(this, "Obrigado pela resposta!", LENGTH_LONG).show();
+//    }
+//    private void passarProximaTela() {
+//
+//    }
 
 }

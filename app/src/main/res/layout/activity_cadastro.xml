@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#986D6E71"
     tools:context=".CadastroActivity">
 
     <TextView
@@ -16,6 +17,8 @@
         android:layout_marginEnd="32dp"
         android:text="Quem sou eu?"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#C9FDF9F9"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,8 +30,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="66dp"
-        android:text="Informe seus dados \npara análises futuras"
+        android:text="Informe seus dados para \nguardarmos suas respostas"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#C9FDF9F9"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="@+id/textView6"
@@ -42,6 +47,8 @@
         android:ems="10"
         android:hint="nome"
         android:inputType="text"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#C9FDF9F9"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -55,6 +62,8 @@
         android:ems="10"
         android:hint="telefone"
         android:inputType="number"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#C9FDF9F9"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/txtNome"
         app:layout_constraintHorizontal_bias="1.0"
@@ -68,6 +77,7 @@
         android:layout_marginTop="124dp"
         android:text="Voltar para \nlogin"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/txtTelefone"
         app:layout_constraintTop_toBottomOf="@+id/txtTelefone" />
 
@@ -77,6 +87,7 @@
         android:layout_height="wrap_content"
         android:text="Finalizar \npesquisa"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnVoltar"
         app:layout_constraintEnd_toEndOf="@+id/txtTelefone" />
 

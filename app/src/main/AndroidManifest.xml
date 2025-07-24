@@ -13,6 +13,12 @@
         android:theme="@style/Theme.PesquisaMetropolitana"
         tools:targetApi="31">
         <activity
+            android:name=".rrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+            android:exported="false" />
+        <activity
+            android:name=".aaaaaaaaaaaaaaaaaa"
+            android:exported="false" />
+        <activity
             android:name=".AdminActivity"
             android:exported="false" />
         <activity

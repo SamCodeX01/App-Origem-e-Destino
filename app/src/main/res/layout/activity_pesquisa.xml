@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#12A08080"
+    android:background="#986D6E71"
     tools:context=".PesquisaActivity">
 
     <TextView
@@ -17,6 +17,7 @@
         android:layout_marginEnd="32dp"
         android:text="Responder Pesquisa"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +29,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="109dp"
-        android:background="#0E000000"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/spnOrigem"
         app:layout_constraintStart_toStartOf="@+id/spnOrigem"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -37,21 +38,22 @@
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#0E000000"
+        android:background="#000000"
+        android:text="DESTINO"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/spnDestino"
         app:layout_constraintStart_toStartOf="@+id/spnDestino"
-        app:layout_constraintTop_toBottomOf="@+id/spnDestino"
-        tools:text="Selecione o destino" />
+        app:layout_constraintTop_toBottomOf="@+id/spnDestino" />
 
     <Spinner
         android:id="@+id/spnOrigem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="67dp"
-        android:background="#0E000000"
+        android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -60,14 +62,15 @@
         android:id="@+id/textView3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#0E000000"
+        android:background="#000000"
+        android:text="ORIGEM"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/spnOrigem"
         app:layout_constraintStart_toStartOf="@+id/spnOrigem"
-        app:layout_constraintTop_toBottomOf="@+id/spnOrigem"
-        tools:text="Selecione a origem" />
+        app:layout_constraintTop_toBottomOf="@+id/spnOrigem" />
 
     <TextView
         android:id="@+id/textView5"
@@ -76,6 +79,7 @@
         android:layout_marginTop="53dp"
         android:text="Escolha a estação  de origem e destino  nos campos abaixo"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
         app:layout_constraintHorizontal_bias="0.0"
@@ -89,6 +93,7 @@
         android:layout_marginTop="84dp"
         android:text="PRÓXIMA"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/spnDestino"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/spnDestino"

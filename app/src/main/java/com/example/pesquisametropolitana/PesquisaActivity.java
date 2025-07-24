@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,9 +21,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class PesquisaActivity extends AppCompatActivity {
     private BancoDeDados bd = null;
-    private String[] linhaVermelha, linhaDiamante, linhaDiamanteEvermelha;
+    private String[] linhaVermelha, linhaAmarela, linhaAmarelaEvermelha;
     private Spinner spnOrigem, spnDestino;
     private Button btnProxima;
+
+    private String padrao = "Selecione a estação";
+    private String sel_amarela = "LINHA AMARELA:";
+    private String sel_vermelha = "LINHA VERMELHA:";
 
 
     @Override
@@ -45,7 +50,43 @@ public class PesquisaActivity extends AppCompatActivity {
     private void mainConfig() {
         bd = BancoDeDados.getInstance();
 
-        // Estações disponíveis //CARREGAR DEPOIS
+        // Estações disponíveis
+        linhaAmarelaEvermelha = new String[] {
+                "Selecione a estação",
+                "LINHA VERMELHA:",
+                "Corinthians-Itaquera",
+                "Artur Alvim",
+                "Patriarca-Vila Ré",
+                "Guilhermina-Esperança",
+                "Vila Matilde",
+                "Penha-Lojas Besni",
+                "Carrão-Assaí Atacadista",
+                "Tatuapé",
+                "Belém",
+                "Bresser-Mooca",
+                "Brás",
+                "Pedro II",
+                "Sé",
+                "Anhangabaú",
+                "República",
+                "Santa Cecília",
+                "Marechal Deodoro",
+                "Palmeiras-Barra Funda",
+
+                "LINHA AMARELA:",
+                "Vila Sônia Profa. Elisabeth Tenreiro",
+                "São Paulo - Morumbi",
+                "Butantã",
+                "Pinheiros",
+                "Faria Lima",
+                "Fradique Coutinho",
+                "Oscar Freire",
+                "Paulista - Pernambucanas",
+                "Higienópolis - Mackenzie",
+                "República",
+                "Luz"
+        };
+
         linhaVermelha = new String[]{
                 "Corinthians-Itaquera",
                 "Artur Alvim",
@@ -67,76 +108,18 @@ public class PesquisaActivity extends AppCompatActivity {
                 "Palmeiras-Barra Funda"
         };
 
-        linhaDiamante = new String[]{
-                "Júlio Prestes",
-                "Palmeiras-Barra Funda",
-                "Lapa",
-                "Domingos de Moraes",
-                "Imperatriz Leopoldina",
-                "Presidente Altino",
-                "Osasco",
-                "Comandante Sampaio",
-                "Quitaúna",
-                "General Miguel Costa",
-                "Carapicuíba",
-                "Santa Terezinha",
-                "Antonio João",
-                "Barueri",
-                "Jardim Belval",
-                "Jardim Silveira",
-                "Jandira",
-                "Sagrado Coração",
-                "Engenheiro Cardoso",
-                "Itapevi",
-                "Santa Rita",
-                "Amador Bueno"
-        };
-
-        linhaDiamanteEvermelha = new String[] {
-                "Selecione uma parada",
-                "LINHA VERMELHA:",
-                "Corinthians-Itaquera",
-                "Artur Alvim",
-                "Patriarca-Vila Ré",
-                "Guilhermina-Esperança",
-                "Vila Matilde",
-                "Penha-Lojas Besni",
-                "Carrão-Assaí Atacadista",
-                "Tatuapé",
-                "Belém",
-                "Bresser-Mooca",
-                "Brás",
-                "Pedro II",
-                "Sé",
-                "Anhangabaú",
+        linhaAmarela = new String[]{
+                "Vila Sônia Profa. Elisabeth Tenreiro",
+                "São Paulo - Morumbi",
+                "Butantã",
+                "Pinheiros",
+                "Faria Lima",
+                "Fradique Coutinho",
+                "Oscar Freire",
+                "Paulista - Pernambucanas",
+                "Higienópolis - Mackenzie",
                 "República",
-                "Santa Cecília",
-                "Marechal Deodoro",
-                "Palmeiras-Barra Funda",
-
-                "LINHA DIAMANTE:",
-                "Júlio Prestes",
-                "Palmeiras-Barra Funda",
-                "Lapa",
-                "Domingos de Moraes",
-                "Imperatriz Leopoldina",
-                "Presidente Altino",
-                "Osasco",
-                "Comandante Sampaio",
-                "Quitaúna",
-                "General Miguel Costa",
-                "Carapicuíba",
-                "Santa Terezinha",
-                "Antonio João",
-                "Barueri",
-                "Jardim Belval",
-                "Jardim Silveira",
-                "Jandira",
-                "Sagrado Coração",
-                "Engenheiro Cardoso",
-                "Itapevi",
-                "Santa Rita",
-                "Amador Bueno"
+                "Luz"
         };
 
         spnOrigem = (Spinner) findViewById(R.id.spnOrigem);
@@ -149,22 +132,29 @@ public class PesquisaActivity extends AppCompatActivity {
 
 
     private void configurarSpinner(Spinner spinner) {
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, linhaDiamanteEvermelha);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.campo_spinner, linhaAmarelaEvermelha);
         spinner.setAdapter(adapter);
     } // OK
 
 
-    private void pintarSpinner(String estacaoEscolhida) {
-        for(String estacao: linhaDiamante) { // Pega cada estação que existe na linha diamante
+    private void pintarSpinner(String estacaoEscolhida, Spinner spinner) {
+        String escolha = spinner.getSelectedItem().toString();
+
+        if (escolha.equals(padrao) || escolha.equals(sel_amarela) || escolha.equals(sel_vermelha)) {
+            spinner.setBackgroundColor(Color.WHITE);
+            return;
+        }
+
+        for(String estacao: linhaAmarela) { // Pega cada estação que existe na linha diamante
             if (estacaoEscolhida.equals(estacao)){
-                spnOrigem.setBackgroundColor(Color.GRAY);
+                spinner.setBackgroundColor(Color.YELLOW);
                 return;
             }
         }
 
         for(String estacao: linhaVermelha) { // Pega cada estação que existe na linha vermelha
             if (estacaoEscolhida.equals(estacao)){
-                spnOrigem.setBackgroundColor(Color.RED);
+                spinner.setBackgroundColor(Color.RED);
                 return;
             }
         }
@@ -172,17 +162,13 @@ public class PesquisaActivity extends AppCompatActivity {
 
 
     private void listeners() {
-        // Passa para a próxima tela (de cadastro)
+        // Passa para a próxima tela (TELA DE CADASTRO)
         btnProxima.setOnClickListener(r -> {
             String origem = spnOrigem.getSelectedItem().toString();
             String destino = spnDestino.getSelectedItem().toString();
 
-            String padrao = "Selecione uma parada";
-            String sel_diamante = "LINHA DIAMANTE:";
-            String sel_vermelha = "LINHA VERMELHA:";
-
-            if (origem != padrao && origem != sel_diamante && origem != sel_vermelha &&
-                    destino != padrao && destino != sel_diamante && destino != sel_vermelha) {
+            if (origem != padrao && origem != sel_amarela && origem != sel_vermelha &&
+                    destino != padrao && destino != sel_amarela && destino != sel_vermelha) {
 
                 // Adicionando ao banco
                 bd.setOrigens(origem);
@@ -200,14 +186,26 @@ public class PesquisaActivity extends AppCompatActivity {
         spnOrigem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String origem = spnOrigem.getSelectedItem().toString();
-                spnOrigem.setBackgroundColor(Color.WHITE);
-                pintarSpinner(origem);
+                pintarSpinner(origem, spnOrigem);
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
                 // Opcional (mas obrigatório implementar)
             }
         });
+
+        spnDestino.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String destino = spnDestino.getSelectedItem().toString();
+                pintarSpinner(destino, spnDestino);
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Opcional (mas obrigatório implementar)
+            }
+        });
+
+
     }
 
 }

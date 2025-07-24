@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class AdminActivity extends AppCompatActivity {
     private BancoDeDados bd = null;
-    private TextView txtResultado;
+    private TextView txtResultado, txtQtdRespostas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,12 @@ public class AdminActivity extends AppCompatActivity {
 
     private void organizar() {
         bd = BancoDeDados.getInstance();
+        txtQtdRespostas = (TextView) findViewById(R.id.txtQtdRespostas);
         txtResultado = (TextView) findViewById(R.id.txtResultado);
         String respostas = "";
+
+        String textoPadrao = txtQtdRespostas.getText().toString();
+        txtQtdRespostas.setText(textoPadrao + bd.quantidadeRespostas);
 
         for (int i=0; i < bd.quantidadeRespostas; i++) {
             respostas +=
