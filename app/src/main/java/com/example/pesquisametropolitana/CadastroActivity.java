@@ -52,25 +52,31 @@ public class CadastroActivity extends AppCompatActivity {
     private void listeners() {
         // Guarda respostas e volta para a tela de login
         btnVoltar.setOnClickListener(r -> {
-            guardarRespostas();
-            passarProximaTela(new Intent(this, LoginActivity.class));
+            if(guardarRespostas())
+                passarProximaTela(new Intent(this, LoginActivity.class));
         });
 
         // Guarda respostas e inicia nova pesquisa
         btnFinalizar.setOnClickListener(r -> {
-            guardarRespostas();
-            passarProximaTela(new Intent(this, PesquisaActivity.class));
+            if(guardarRespostas())
+                passarProximaTela(new Intent(this, PesquisaActivity.class));
         });
     }
 
-    private void guardarRespostas() {
+    private boolean guardarRespostas() {
         String nome = txtNome.getText().toString();
         String telefone = txtTelefone.getText().toString();
 
-        bd.setNome(nome);
-        bd.setTelefone(telefone);
-        bd.quantidadeRespostas++;
-        Toast.makeText(this, "Obrigado pela resposta!", LENGTH_SHORT).show();
+        if (!nome.isEmpty() || !telefone.isEmpty()) {
+            bd.setNome(nome);
+            bd.setTelefone(telefone);
+            bd.quantidadeRespostas++;
+            Toast.makeText(this, "Obrigado pela resposta!", LENGTH_SHORT).show();
+            return true;
+        }
+        else
+            Toast.makeText(this, "Dados inválidos ou campos vazios!", LENGTH_SHORT).show();
+        return false;
     }
     private void passarProximaTela(Intent intent) {
         startActivity(intent);

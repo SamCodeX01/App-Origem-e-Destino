@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             String usuario = txtUsuario.getText().toString();
             String senha = txtSenha.getText().toString();
 
-            if (usuario.equals("") && senha.equals("")) {
+            if (usuario.equals("pesquisador") && senha.equals("1234")) {
                 startActivity(new Intent(this, PesquisaActivity.class));
                 finish();
             }
